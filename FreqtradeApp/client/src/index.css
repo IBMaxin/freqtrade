@@ -1,0 +1,229 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(222, 84%, 5%);
+  --foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --popover: hsl(222, 84%, 5%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 5%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --primary: hsl(142, 76%, 36%);
+  --primary-foreground: hsl(355, 100%, 97%);
+  --secondary: hsl(217, 32%, 17%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --accent: hsl(217, 32%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(142, 76%, 36%);
+  --radius: 0.5rem;
+  
+  /* Trading specific colors */
+  --profit: hsl(142, 76%, 36%);
+  --loss: hsl(0, 84%, 60%);
+  --warning: hsl(38, 92%, 50%);
+  --info: hsl(199, 89%, 48%);
+  
+  /* Dark theme gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(222, 84%, 5%) 0%, hsl(217, 32%, 17%) 100%);
+  --gradient-card: linear-gradient(135deg, hsl(222, 84%, 5%) 0%, hsl(217, 32%, 10%) 100%);
+  
+  /* Glass morphism */
+  --glass-bg: hsla(222, 84%, 5%, 0.5);
+  --glass-border: hsla(217, 32%, 17%, 0.5);
+}
+
+.dark {
+  --background: hsl(222, 84%, 5%);
+  --foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --popover: hsl(222, 84%, 5%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 5%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --primary: hsl(142, 76%, 36%);
+  --primary-foreground: hsl(355, 100%, 97%);
+  --secondary: hsl(217, 32%, 17%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --accent: hsl(217, 32%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(142, 76%, 36%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Trading specific styles */
+  .profit-text {
+    @apply text-emerald-400;
+  }
+
+  .loss-text {
+    @apply text-red-400;
+  }
+
+  .profit-glow {
+    box-shadow: 0 0 20px hsla(142, 76%, 36%, 0.3);
+  }
+
+  .loss-glow {
+    box-shadow: 0 0 20px hsla(0, 84%, 60%, 0.3);
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Chart styles */
+  .chart-container {
+    background: var(--gradient-card);
+    border: 1px solid var(--border);
+  }
+
+  /* Code editor styles */
+  .code-editor {
+    background: hsl(222, 84%, 3%);
+    border: 1px solid hsl(217, 32%, 17%);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-bg {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  /* Animation keyframes */
+  @keyframes pulse-profit {
+    0%, 100% {
+      box-shadow: 0 0 20px hsla(142, 76%, 36%, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px hsla(142, 76%, 36%, 0.5);
+    }
+  }
+
+  @keyframes pulse-loss {
+    0%, 100% {
+      box-shadow: 0 0 20px hsla(0, 84%, 60%, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px hsla(0, 84%, 60%, 0.5);
+    }
+  }
+
+  .pulse-profit {
+    animation: pulse-profit 2s ease-in-out infinite;
+  }
+
+  .pulse-loss {
+    animation: pulse-loss 2s ease-in-out infinite;
+  }
+}
+
+@layer components {
+  /* Trading button variants */
+  .btn-buy {
+    @apply bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-500;
+  }
+
+  .btn-sell {
+    @apply bg-red-500 hover:bg-red-600 text-white border-red-500;
+  }
+
+  .btn-neutral {
+    @apply bg-slate-600 hover:bg-slate-500 text-white border-slate-600;
+  }
+
+  /* Status indicators */
+  .status-active {
+    @apply bg-emerald-500/20 text-emerald-400 border-emerald-500/20;
+  }
+
+  .status-inactive {
+    @apply bg-slate-500/20 text-slate-400 border-slate-500/20;
+  }
+
+  .status-error {
+    @apply bg-red-500/20 text-red-400 border-red-500/20;
+  }
+
+  .status-warning {
+    @apply bg-amber-500/20 text-amber-400 border-amber-500/20;
+  }
+
+  /* Card variants */
+  .card-trading {
+    @apply glass rounded-xl border;
+  }
+
+  .card-metric {
+    @apply card-trading p-6;
+  }
+
+  /* Typography */
+  .text-mono {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+}
+
+@layer utilities {
+  /* Utility classes for trading app */
+  .text-profit {
+    color: var(--profit);
+  }
+
+  .text-loss {
+    color: var(--loss);
+  }
+
+  .bg-profit {
+    background-color: var(--profit);
+  }
+
+  .bg-loss {
+    background-color: var(--loss);
+  }
+
+  .border-profit {
+    border-color: var(--profit);
+  }
+
+  .border-loss {
+    border-color: var(--loss);
+  }
+}
