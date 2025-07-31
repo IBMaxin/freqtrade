@@ -23,4 +23,3 @@ export function useApi<T>(endpoint: string): { data: T | null; error: string | n
 
 	return { data, error, loading };
 }
-};

@@ -20,7 +20,7 @@ interface Trade {
 const Dashboard = () => {
   const { data: metrics, loading: metricsLoading, error: metricsError } = useApi<Metrics>('/api/dashboard/metrics');
   const { data: trades, loading: tradesLoading, error: tradesError } = useApi<Trade[]>('/api/dashboard/recent-trades');
-  const { message: wsMessage, isConnected } = useWebSocket('ws://localhost:8080/ws');
+  const { data: wsMessage, error: wsError } = useWebSocket('ws://localhost:5000/ws');
 
   const [realTimeUpdates, setRealTimeUpdates] = useState<string[]>([]);
   const { data: balance, error: balanceError, loading: balanceLoading } = useApi('/api/balance');
@@ -66,7 +66,7 @@ const Dashboard = () => {
 
       <section>
         <h2>Real-Time Updates</h2>
-        <p>WebSocket Connected: {isConnected ? 'Yes' : 'No'}</p>
+        <p>WebSocket Connected: {wsError ? 'No (Error)' : 'Yes'}</p>
         <ul>
           {realTimeUpdates.map((update, index) => (
             <li key={index}>{update}</li>
